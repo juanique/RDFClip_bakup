@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}RDF Data Visualization{% endblock %}
+
+{% block head %}
+        <link rel='stylesheet' href='/media/css/Lib/jquery.jqplot.min.css'>
+        <link rel='stylesheet' href='/media/css/Lib/jquery.datatables.demo_table.css'>
+        <link rel='stylesheet' href='/media/css/Lib/jquery.datatables.demo_page.css'>
+        <link rel='stylesheet' href='/media/css/Lib/jquery.cluetip.css'>
+        <link rel='stylesheet' href='/media/css/Components/DropDownList.base.css'>
+        <link rel='stylesheet' href='/media/css/Components/MagicTextArea.base.css'>
+        <link rel='stylesheet' href='/media/css/Views/rdfadmin.query.css'>
+
+        <script type="text/javascript">
+            var proxy_url = "{% url rdfadmin.views.proxy %}";
+            var explore_url = "{% url rdfadmin.views.explore %}";
+        </script>
+{% endblock %}
+
+{% block header %}Query Sparql Endpoint {% endblock %}
+
+
+{% block content %}
+    <div id="mainWrap">
+
+        <div class="container inline_float" id='leftPanel'>
+            <h3>Sample Queries</h3>
+            <script id='savedQueriesTemplate' title='${title}'type='text/x-jquery-tmpl'>
+                <li>${name}</li>
+            </script>
+            <ul id="savedQueriesList">
+                Loading....
+            </ul>
+
+            <h3>Graphs</h3>
+            <script id='graphsTemplate' type='text/x-jquery-tmpl'>
+                <li><span>${graphName}</li>
+            </script>
+            <ul id="graphsList">
+                Loading....
+            </ul>
+
+            <h3>Recent Queries</h3>
+            <script id='recentQueriesTemplate' type='text/x-jquery-tmpl'>
+                <li title="${title}">${querySnip}</li>
+            </script>
+            <ul id="recentQueriesList">
+                Loading....
+            </ul>
+        </div>
+        <div class="container inline_float" id="mainContainer">
+            <label>EndPoint:</label><input type="text" onchange='loadGraphs();' value="{{sparql_endpoint}}" id="sparql_endpoint">
+            <textarea id="query">SELECT * WHERE {?s ?p ?o} LIMIT 20</textarea>
+            <button disabled onclick="executeQuery();">GO</button> 
+            <span class="clickable" onclick="showTable()">Table&nbsp;</span>|&nbsp;
+            <span onclick="showChart()" class="clickable">PieChart</span>&nbsp;|&nbsp;
+
+            <div id='messages'>
+            </div>
+            <div id="imgDiv" style="display: none;">
+                <img src="/media/img/Views/rdfadmin.loader.gif">
+            </div>
+            <script id='tableTemplate' type='text/x-jquery-tmpl'>
+                <table class='display'>
+                    <thead><tr></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </script>
+            <div id="table_div">
+            </div>
+            <div id='chart_div'>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="/media/js/Lib/jquery-fieldselection.pack.js"></script>
+    <script type="text/javascript" src="/media/js/Lib/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="/media/js/Lib/jqplot.plugins/jqplot.pieRenderer.min.js"></script>
+    <script type="text/javascript" src="/media/js/Lib/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/media/js/Lib/jquery.cluetip.js"></script>
+    <script type="text/javascript" src="/media/js/Lib/jquery.color.js"></script>
+    <script type="text/javascript" src="/media/js/Lib/oop.js"></script>
+    <script type="text/javascript" src="/media/js/Components/Notifier.js"></script>
+    <script type="text/javascript" src="/media/js/Components/MagicTextarea.js"></script>
+    <script type="text/javascript" src="/media/js/Components/DropDownList.js"></script>
+    <script type="text/javascript" src="/media/js/Rdf/rdf.js"></script>
+    <script type="text/javascript" src='/media/js/Views/rdfadmin.query.js'></script>
+
+{% endblock %}

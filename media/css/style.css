@@ -1,0 +1,156 @@
+body{
+    width:100%;
+    text-align:center;
+    font-family:arial;
+    margin:0;
+    padding:0;
+    font-size:12px;
+    background:#eee;
+	color:#333;
+	border-top:5px solid #333;
+}
+
+h1{
+    color:#333;
+    padding:10px;
+    text-align:left;
+	font-size:2.8em;
+	background:#E6EEF4;
+	border-bottom:1px solid #C6D9E7;
+}
+
+
+.inline_float{
+    display:inline;
+    float:left;
+    margin-left:10px;
+
+}
+
+.container{
+    background-color:#dddbdb;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    padding:10px;
+    text-align:left;
+}
+
+.container h3{
+	background:#333 !important;
+	border:none !important;
+	color:#fff !important;
+	font-weight:normal !important;
+}
+
+label{
+    color:#333;
+    font-size:1.4em !important;
+    font-weight:bold;
+}
+
+div#mainWrap{
+    width:80%;
+    margin:0 auto;
+    margin-bottom:3px;
+    text-align:left;
+}
+
+.clickable{
+	color:#279dc2;
+    cursor:pointer;
+}
+
+HR{
+    height:1px;
+    border:0 none;
+    border-top:1px dashed #444;
+    background-color:#F2F2F2;
+}
+
+.inlineButton{
+    background:#E6EEF4 ;
+    border:1px solid #C6D9E7;
+    border-radius:5px;
+    cursor:pointer;
+	color:#279DC2;
+	margin-right:10px;
+}
+
+a:link , a:visited {
+    color:#333; 
+	font-weight:normal;
+}
+a:hover {
+	color:#666;
+}
+.DropDownList li{
+	padding:3px 0;
+	color:#666;
+}
+
+.DropDownList li.highlighted{
+    background:#efeded !important;
+	color:#000 !important;
+}
+
+#mainContainer{
+	background-color:#E6EEF4 !important;
+	border:1px solid #C6D9E7;
+}
+
+.cluetip-default h3#cluetip-title{
+    background:#dddbdb !important;
+    color:#666 !important;
+}
+
+.cluetip-default {
+    border:1px solid #ccc !important;
+    border-left:0;
+}
+
+button{
+	cursor:pointer;
+}
+#table_div{
+	margin-top:15px !important;
+}
+table.display thead th {
+	border-bottom:1px solid #C6D9E7 !important;
+}
+.dataTables_length {
+	width:16% !important;
+}
+.dataTables_info {
+	width:21% !important;
+}
+tr.even td.sorting_1 {
+    background-color:#EAEBFF !important;
+}
+tr.odd td.sorting_1 {
+    background-color:#e7e4de !important;
+}
+tr.odd{
+	background:#eee !important;
+}
+table.display td{
+	font-weight:bold;
+}
+.propertyRow th, .resultRow th, .newPropertyRow th{
+	background:#eee;
+	padding:3px;
+	font-weight:bold;
+}
+.propertyRow td, .resultRow td, .newPropertyRow td{
+	background:#f4f4f4;
+	padding:3px;
+	font-weight:bold;
+}
+.propertyHeader, .valueHeader {
+    text-align:left !important;
+	font-size:1.2em;
+	color:#333;
+}
+.newPropertyRow input.empty {
+    color:#666 !important;
+}

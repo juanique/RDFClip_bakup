@@ -1,0 +1,39 @@
+.textareaMagicDiv{
+    white-space: pre-wrap;
+    color: transparent;
+    /* color: transparent;*/ 
+}
+.textareaMagicDiv span{
+    color: transparent;
+}
+
+.magicTag{
+    position.absolute;
+    cursor: pointer;
+    font-size: 11pt;
+    margin: auto;
+    text-align: center;
+    background-color: transparent;
+    color: transparent;
+}
+
+.magicTextarea{
+    border: 1px solid gray;
+    resize: none;
+    overflow: hidden;
+    background: transparent;
+
+}
+
+
+.magicTextarea,
+.magicTag,
+.textareaMagicDiv{
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 11pt;
+}
+
+.magicTextarea,
+.textareaMagicDiv{
+    padding-top: 5px;
+}

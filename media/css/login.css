@@ -1,0 +1,8 @@
+#mainWrap label{
+    width: 100px;
+    float: left;
+    display: block;
+    text-align: right;
+    padding-top: 3px;
+    margin-right: 0.5em;
+}

@@ -1,0 +1,137 @@
+html {
+    overflow: -moz-scrollbars-vertical;
+}
+textarea{
+    width: 100%;
+    /*
+    height: 100px;
+    */
+    background: white;
+}
+
+
+#sparql_endpoint,
+.textareaMagicDiv{
+    background: #FAFAFA;
+}
+
+#table_div div div span{
+    font-size: 12pt;
+}
+
+#table_div table td{
+    text-align: left;
+}
+
+div#mainWrap{
+   width: 1042px; 
+}
+
+* html #sparql_endpoint {
+    width: 727px;
+}
+
+#mainContainer{
+   width: 789px; 
+}
+
+#imgDiv,
+#table_div{
+    margin: 0 auto 0;
+    text-align: center;
+}
+
+#leftPanel{
+    width: 185px;
+}
+
+#cluetip-inner TEXTAREA{
+    background: transparent;
+    color: black;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    resize: none;
+    font-size: 8pt;
+}
+
+#savedQueriesList,
+#graphsList,
+#recentQueriesList{
+    border: 0;
+    list-style-type: square;
+    margin-left: 15px;
+}
+
+/*query textarea*/
+#sparql_proxy,
+#sparql_endpoint,
+#query{
+    border: 1px solid #CCC;
+    width: 100%;
+}
+
+#query{
+    margin-top: 5px;
+}
+
+label{
+    font-weight: bold;
+}
+.container h3{
+    background: #666;
+    border: 1px solid #333;
+    color: #FC6;
+    height: 25px;
+    padding-left: 5px;
+    padding-top: 7px;
+}
+
+.DropDownList li.highlighted{
+    background: #FC6;
+}
+
+
+.cluetip-default {
+    border: 2px solid black;
+    border-left: 0;
+}
+.cluetip-default h3#cluetip-title{
+    color: #FC6;
+    background: #666;
+}
+
+.cluetip-default #cluetip-outer{
+    background-color: #FAFAFA;
+}
+
+
+tr.odd{
+    background-color: #FD7;
+}
+
+tr.even{
+    background-color: #FAFAFA;
+}
+
+tr.odd td.sorting_1 {
+    background-color: #FC6;
+}
+
+tr.even td.sorting_1 {
+    background-color: #FEB;
+}
+
+.magicTextareaSuggestionList{
+    border: 1px solid #444;
+    border-bottom: 0;
+}
+.magicTextareaSuggestionList li{
+    border-bottom: 1px solid #444;
+    background-color: #FAFAFA;
+    padding: 5px;
+    font-weight: bold;
+}
+
+
+

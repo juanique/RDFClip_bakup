@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>{% block title %}RDF Clip {% endblock %} - {{user}}</title>
+        <link rel="stylesheet" type="text/css" href="/media/css/style.css">
+        <!-- CDN 
+            <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>        
+            <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"> </script>
+        -->
+        <script type='text/javascript' src="/media/js/Lib/jquery.min.js"></script>        
+        <script type="text/javascript" src="/media/js/Lib/jquery.tmpl.min.js"> </script>
+
+        <script type="text/javascript">$.noConflict();</script>
+        <script src="/media/js/Base/base.js"></script>
+        {% block head %} {% endblock %}
+    </head>
+
+    <body>
+        <H1>{% block header %} {% endblock %}</H1>
+        <!--  Logged in as: {{user}} -->
+        
+        {% block content %} {% endblock %}
+
+        <script type='text/javascript'>
+            if(console){
+                console.log({{debug}});
+            }
+        </script>
+    </body>
+</html>
+
+

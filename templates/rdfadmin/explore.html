@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load verbatim_templatetag %}
+
+{% block title %}RDF Data Explorer{% endblock %}
+
+{% block head %}
+        <link rel='stylesheet' href='/media/css/Components/DropDownList.base.css'>
+        <link rel="stylesheet" type="text/css" href="/media/css/Views/rdfadmin.explore.css">
+        <script type="text/javascript">
+            var proxyUrl = "{% url rdfadmin.views.proxy %}";
+            var labelPredicate = "http://www.w3.org/2000/01/rdf-schema#label";
+            var base_url = "";
+            var insert_graph = "http://www.rdfclip.com/data";
+        </script>
+{% endblock %}
+
+{% block header %}RDF Explorer {% endblock %}
+
+{% block content %}
+        <div class='franja'></div>
+        <div id="mainWrap">
+
+            <div class="container">
+                <label>Endpoint:</label><input type="text" value="http://localhost:8890/sparql" id="inputEndpoint">
+                <label>Graph:</label><input type="text" value="" id="inputGraph">
+                <HR>
+
+                <table id="settingsTable">
+                    <tr>
+                        <td><label>Browse URI:</label></td>
+                        <td class="inputField"><input type="text" value="" id="inputUri"></td>
+                        <td><button onclick="loadUri(jQuery('#inputUri').val());">GO</button></td>
+                    </tr><tr>
+                        <td><label>Search Label:</label></td>
+                        <td class="inputField"><input type="text" value="" id="inputSearch"></td>
+                        <td><button onclick="search(jQuery('#inputSearch').val());">GO</button></td>
+                    </tr>
+
+                </table>
+                
+            </div>
+            <div class="container">
+                <div id="imgDiv" style="display: none">
+                    <img src="/media/img/Views/rdfadmin.loader.gif">
+                </div>
+                <script id='propertiesTemplate' type='text/x-jquery-tmpl'>
+                    {% verbatim %}
+                    <TR class="propertyRow">
+                        <TH>{{html propertyName}}</TH>
+                        <TD>{{html propertyValue}}</TD>
+                    </TR>
+                    {% endverbatim %}
+                </script> 
+                <script id='newPropertyTemplate' type='text/x-jquery-tmpl'>
+                    {% verbatim %}
+                    <TR class="newPropertyRow">
+                        <TH><span title='${propertyUri}' >{{html propertyName}}</span></TH>
+                        <TD><INPUT type='text' emptyValue='Click to add' class='newPropertyInput'></TD>
+                    </TR>
+                    {% endverbatim %}
+                </script> 
+                <TABLE id="explorerTable" style = "display: none">
+                    <THEAD>
+                        <TR class="headersRow">
+                            <TH class="propertyHeader">Property</TH>
+                            <TH class="valueHeader">Value</TH>
+                        </TR>
+                    </THEAD>
+                    <TBODY></TBODY>
+                </TABLE>
+
+                <script id='searchResultsTemplate' type='text/x-jquery-tmpl'>
+                    {% verbatim %}
+                    <TR class="resultRow">
+                        <TD>{{html propertyName }}</TD>
+                    </TR>
+                    {% endverbatim %}
+                </script>
+                <TABLE id="searchResultsTable" style = "display : none">
+                    <THEAD>
+                        <TR class="headersRow">
+                            <TH class="propertyHeader">Results</TH>
+                        </TR>
+                    </THEAD>
+                    <TBODY></TBODY>
+                </TABLE>
+
+                <div id="resultsMsgDiv" style="display: none">
+                    No results.
+                </div>
+                <br>
+                <button class='inlineButton' id='newPropertyButton'>Add +</button>
+                <button class='inlineButton' id='saveChangesButton'>Save Changes</button>
+            </div>
+        </div>
+        <script type="text/javascript" src="/media/js/Lib/jquery.query-2.1.7.js"></script>
+        <script type="text/javascript" src="/media/js/Lib/oop.js"></script>
+        <script type="text/javascript" src="/media/js/Rdf/rdf.js"></script>
+        <script type="text/javascript" src="/media/js/Components/Notifier.js"></script>
+        <script type="text/javascript" src="/media/js/Components/DropDownList.js"></script>
+        <script type="text/javascript" src="/media/js/Components/jquery.extendedInputs.js"></script>
+        <script type="text/javascript" src="/media/js/Views/rdfadmin.explore.js"></script>
+{% endblock %}
