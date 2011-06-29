@@ -10,13 +10,16 @@ function initNewPropertySelector(){
     newPropertySelector.jUl.hide();
     newPropertySelector.addListener({
         optionSelected : function(value){
+            console.debug(value);
             var rendered = jQuery('#newPropertyTemplate').tmpl(value);
             rendered.appendTo(jQuery('#explorerTable tbody'));
-            var input = rendered.find('input');
+
+            var type= RDF.dataType(value.propertyType);
+            console.debug(type);
+            var input = RDF.dataType(value.propertyType).selector();
             input.data('propertyUri',value.propertyUri);
-            input.data('propertyType',RDF.dataType(value.propertyType));
-            input.emptyValue();
-            input.keyup(function(e) { if(e.keyCode == 13){input.blur();} });
+            rendered.find('td').empty().append(input);
+            
             input.focus();
             newPropertySelector.hide();
         }
@@ -34,12 +37,16 @@ function getNewTriples(){
 
     });
     sparql += "}";
+    console.debug(sparql);
+
+    /*
     getProxy().query({
         query : sparql,
         callback : function(r){
             loadUri(jQuery('#inputUri').val());
         }
     });
+    */
     return sparql;
 }
 

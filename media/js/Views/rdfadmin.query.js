@@ -277,3 +277,10 @@ function loadSavedQueries(){
         }
     });
 }
+
+                    parseCaretWord : function(word,value){
+                        return {
+                            span : $('&lt;span&gt;'+value+'&lt;/span&gt;').css('border-bottom','1px dotted blue'),
+                            tag : $('&lt;div title="'+word+' was parsed and '+value+' was tagged"&gt;')
+                        }
+                    }

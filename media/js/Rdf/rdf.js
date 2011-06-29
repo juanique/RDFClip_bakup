@@ -2,6 +2,17 @@
 var __identity = function(x){return x};
 
 var RDF = {
+    Namespace : function(prefix){
+        return function(sufix){
+            var uri = prefix+sufix;
+            return {
+                uri : uri,
+                hash : escape(uri),
+                toString : function(){ return uri; }
+            }
+        }
+    },
+
     SparqlProxy : Class.extend({
         init : function(url, endpoint){
             this.ws = url;
@@ -86,35 +97,13 @@ var RDF = {
 
     }),
 
-
-    _dataTypes : {
-        RDFLiteral : {
-            uri : 'http://www.w3.org/2000/01/rdf-schema#Literal',
-            parse : __identity,
-            sparqlFormat : function(x){ return '"'+x+'"' }
-        },
-
-        RDFUri : {
-            uri : 'RDFUri:not_a_valid_uri',
-            parse : __identity,
-            sparqlFormat : function(val){
-                return "<"+val+">";
-            }
-        },
-
-        RDFInteger : {
-            uri : "http://www.w3.org/2001/XMLSchema#integer",
-            parse : parseInt,
-            sparqlFormat : str
-        },
-
-        RDFString : {
-            uri : "http://www.w3.org/2001/XMLSchema#string",
-            parse : __identity,
-            sparqlFormat : function(x){return '"'+x+'"';}
-        }
+    hashUri : function(uri){
+        return escape(uri);
     },
 
+
+    _dataTypes : {
+    },
 
     getResultHeaders : function(response){
         var out = [];
@@ -125,18 +114,68 @@ var RDF = {
         return new RDF.ResultSet(response.results.bindings);
     },
     dataType : function(type, dataType){
-        if(type == 'literal')
-            return RDF._dataTypes.RDFLiteral;
-        if(type == 'uri')
-            return RDF._dataTypes.RDFUri;
+        dataType = dataType || type;
+        var hashed = RDF.hashUri(dataType);
 
-        dataType = type;
-        for(var i in RDF._dataTypes){
-            if(RDF._dataTypes[i].uri == dataType){
-                return RDF._dataTypes[i];
-            }
+        if(RDF._dataTypes[hashed]){
+            return RDF._dataTypes[hashed];
         }
         return RDF._dataTypes.RDFUri;
     }
 }
 
+var $_RDFS = RDF.Namespace('http://www.w3.org/2000/01/rdf-schema#');
+var $_XMLS = RDF.Namespace('http://www.w3.org/2001/XMLSchema#');
+var $_CLIPS = RDF.Namespace('http://www.rdfclip.com/schema#');
+
+
+RDF._baseType = Class.extend({
+    parse : __identity,
+    sparqlFormat : str,
+    validate : function(x){ return true; },
+    selector : function(){
+        var input = jQuery("<input emptyValue='Click to add' class='newPropertyInput'>");
+        input.data('propertyType',RDF.dataType(this.uri));
+        input.keyup(function(e) { if(e.keyCode == 13){input.blur();} });
+        input.emptyValue();
+        return input;
+    }
+});
+
+RDF._dataTypes.RDFUri = new (RDF._baseType.extend({
+    uri : 'RDFUri:not_a_valid_uri',
+    sparqlFormat : function(val){
+        return "<"+val+">";
+    }
+}))();
+
+RDF._dataTypes[$_RDFS("Literal").hash] = new (RDF._baseType.extend({
+    uri : $_RDFS("Literal").uri,
+    parse : __identity,
+    sparqlFormat : function(x){ return '"'+x+'"' }
+}))();
+
+RDF._dataTypes[$_XMLS("integer").hash] = new (RDF._baseType.extend({
+    uri : $_XMLS("integer").uri,
+    parse : parseInt,
+    sparqlFormat : str
+}))();
+
+RDF._dataTypes[$_XMLS("string").hash] = new (RDF._baseType.extend({
+    uri : $_XMLS("string").uri,
+    parse : __identity,
+    sparqlFormat : function(x){return '"'+x+'"';}
+}))();
+
+RDF._dataTypes[$_CLIPS("IMDBLink").hash] = new (RDF._baseType.extend({
+    uri : $_CLIPS("IMDBLink").uri,
+    parse : __identity,
+    sparqlFormat : function(x){return '<'+x+'>';},
+    selector : function(){
+        var input = jQuery("<input emptyValue='Click and paste an IMDB.com link' class='newPropertyInput'>");
+        input.data('propertyType',RDF.dataType(this.uri));
+        input.keyup(function(e) { if(e.keyCode == 13){input.blur();} });
+        input.emptyValue();
+        return input;
+    },
+}))();

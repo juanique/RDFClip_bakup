@@ -65,7 +65,6 @@ var SparqlParser = Notifier.extend({
                         var colored_nodes = self.colorWord(nodes[i], sparql_var);
                     } catch(e) {
                         console.trace();
-
                     }
                     new_nodes = new_nodes.concat(colored_nodes);
                 }else{
@@ -163,7 +162,7 @@ var MagicTextArea = Notifier.extend({
             'keypress' : function(e){
                 setTimeout( function(){
                     self.fitToContent();
-                    self.updateMagicTextAreaDiv(e)
+                    self.updateMagicTextAreaDiv()
                 },1);
             },
             'keyup' : function(e){
@@ -171,7 +170,7 @@ var MagicTextArea = Notifier.extend({
             },
             'change' : function(e){
                 self.fitToContent();
-                self.updateMagicTextAreaDiv(e)
+                self.updateMagicTextAreaDiv()
             }
         });
 
@@ -212,8 +211,10 @@ var MagicTextArea = Notifier.extend({
             },
             "resize" : function(){
                 self.adjustMagicDiv();
+                self.refreshTags();
             }
         });
+
 
     },
 
@@ -243,11 +244,11 @@ var MagicTextArea = Notifier.extend({
         }
     },
 
-    updateMagicTextAreaDiv : function(e){
+    updateMagicTextAreaDiv : function(forceParse){
+        forceParse = forceParse || false;
         var self = this;
 
-
-        if(self.jTa.val() == self.last_value)
+        if(self.jTa.val() == self.last_value && !forceParse)
             return;
 
         self.last_value  = self.jTa.val();
@@ -306,15 +307,17 @@ var MagicTextArea = Notifier.extend({
                 currentNodes.push(newNodes.pop());
                 text = lastText+text;
             }
-            if(newTailNodes.length > 0 && (newTailNodes[0].tagName != 'SPAN' || self.word_separators.indexOf(text[text.length-1]) == -1)){
-                debug('Merging front');
+            if(newTailNodes.length > 0 && (newTailNodes[0].tagName != 'SPAN' || jQuery.inArray(text[text.length-1], self.word_separators) == -1)){
+                //debug('Merging front');
                 var firstText = jQuery(newTailNodes[0]).text();
                 currentNodes.push(newTailNodes.shift());
                 text += firstText;
             }
         }
         var generatedNodes = self.parseNodeText(text);
-        generatedNodes = generatedNodes.map(function(n){ return (typeof(n) == 'string')? document.createTextNode(n):n;});
+        for(var k = 0; k < generatedNodes.length; k++){
+            generatedNodes[k] = (typeof(generatedNodes[k]) == 'string')? document.createTextNode(generatedNodes[k]) : generatedNodes[k];
+        }
 
         self.jMagicDiv.html("");
         self.jMagicDiv.append(jQuery(newNodes));
@@ -331,6 +334,50 @@ var MagicTextArea = Notifier.extend({
 
         //debug(newNodes);
         self.refreshTags();
+        self.refreshTextAreaText();
+
+    },
+
+    refreshTextAreaText : function(keepCaret){
+        var self = this;
+        var cursorPos;
+        keepCaret = keepCaret || true;
+        if(keepCaret)
+            cursorPos = self.jTa.getSelection().start;
+        self.jTa.val(self.jMagicDiv.text());
+        if(keepCaret)
+            setCaretToPos(self.jTa[0], cursorPos);
+    },
+
+    match : function(text, exp, parser, seps){
+        var self = this;
+
+        seps = seps || self.word_separators;
+
+        var dedupe = {}
+        var nodes = [text];
+        var new_nodes = [];
+        var matches = text.match(exp);
+
+        if(!matches){
+            return nodes;
+        }
+        for(var i = 0; i < matches.length; i++){
+            dedupe[matches[i]] = 1;
+        }
+        for(var matched in dedupe){
+            for(var i = 0; i < nodes.length; i ++){
+                if(typeof(nodes[i]) == 'string'){
+                    var colored_nodes = colored_nodes  = self.matchWord(nodes[i], matched, seps, parser);
+                    new_nodes = new_nodes.concat(colored_nodes);
+                }else{
+                    new_nodes.push(nodes[i]);
+                }
+            }
+            nodes = new_nodes;
+            new_nodes = [];
+        }
+        return nodes;
     },
 
 
@@ -371,8 +418,18 @@ var MagicTextArea = Notifier.extend({
             }
         }else{
             if(text == word){
-                var parsed = self.handleMatch(parser.wordMatch(word));
+                var parsed;
+                if(typeof(parser) == 'object'){
+                    parsed = self.handleMatch(parser.wordMatch(word));
+                }else if(typeof(parser) == 'function'){
+                    parsed = self.handleMatch(parser(word));
+                }
+                if(parsed.span instanceof jQuery){
+                    parsed.span = parsed.span[0];
+                }
+
                 out.push(parsed.span);
+
             }else{
                 out.push(text);
             }
@@ -437,11 +494,12 @@ var MagicTextArea = Notifier.extend({
     getWordAtPos : function(text, pos){
         var self = this;
 
-        for(var i = pos ; i >= 1 && self.word_separators.indexOf(text[i-1]) == -1; i--){
+        for(var i = pos ; i >= 1 && jQuery.inArray(text.charAt(i-1), self.word_separators)  == -1 ; i--){
         }
-        for(var j = pos ; j < text.length && self.word_separators.indexOf(text[j]) == -1; j++){
+        for(var j = pos ; j < text.length && jQuery.inArray(text.charAt(j), self.word_separators)  == -1; j++){
         }
         return { start : i, end : j, word : text.substring(i,j) };
+        return null;
     },
 
     parseCaretWord : function(parser){
@@ -461,6 +519,7 @@ var MagicTextArea = Notifier.extend({
             if( x <= cursorPos && cursorPos < x + dx +d && node.tagName != 'SPAN'){
                 var nodeCursorPos = cursorPos - x;
                 var wordData = self.getWordAtPos(nodeText, nodeCursorPos);
+                console.debug(wordData);
                 var parsed = parser.parseCaretWord(wordData.word);
                 newNodes.push(document.createTextNode(nodeText.substring(0,wordData.start)));
                 if(typeof parsed == 'string'){
@@ -470,18 +529,24 @@ var MagicTextArea = Notifier.extend({
                         newNodes.push(document.createTextNode(parsed));
                    }
                 }else{
+                    if(parsed.span instanceof jQuery){
+                        parsed.span = parsed.span[0];
+                    }
                     self.handleMatch(parsed);
                     newNodes.push(parsed.span);
                 }
-                newNodes.push(document.createTextNode(nodeText.substring(wordData.end)));
+                console.debug(nodeText.substring(wordData.end));
                 var caret = jQuery(newNodes).text().length;
+                newNodes.push(document.createTextNode(nodeText.substring(wordData.end)));
                 newNodes = newNodes.concat(currentNodes);
-                return {caret : caret, content : newNodes}
+                var out = {caret : caret, content : newNodes}
+                console.debug(out);
+                return out;
             }
             x += dx;
             newNodes.push(node);
         }
-        //debug("x: "+x+", caretPos: "+cursorPos);
+        console.debug("x: "+x+", caretPos: "+cursorPos);
             
         return false;
         
@@ -496,7 +561,7 @@ var MagicTextArea = Notifier.extend({
             self.jMagicDiv.empty();
             self.jMagicDiv.append(result.content);
             self.refreshTags();
-            self.updateMagicTextAreaDiv();
+            self.refreshTextAreaText(false);
             self.magicTextAreaKeyup();
             setCaretToPos(self.jTa[0],result.caret);
             return true;
@@ -506,7 +571,13 @@ var MagicTextArea = Notifier.extend({
 
     handleMatch : function(parsed){
         if(parsed.span){
+            if(parsed.span instanceof jQuery){
+                parsed.span = parsed.span[0];
+            }
             if(parsed.tag){
+                if(parsed.tag instanceof jQuery){
+                    parsed.tag = parsed.tag[0];
+                }
                 jQuery(parsed.tag).addClass('magicTag');
                 parsed.span.tag = parsed.tag;
                 jQuery(parsed.tag).html(jQuery(parsed.span).html());
@@ -531,7 +602,6 @@ var MagicTextArea = Notifier.extend({
             }
             placeOnTop(jQuery(span),jQuery(span.tag));
         });
-        self.jTa.val(self.jMagicDiv.text());
     },
 
     addParser : function(parser){
@@ -539,7 +609,16 @@ var MagicTextArea = Notifier.extend({
 
         parser.magicEngine = self;
         self.parsers.push(parser);
-        self.updateMagicTextAreaDiv();
+        self.updateMagicTextAreaDiv(true);
+    },
+
+    setParsers : function(parsers){
+        var self = this;
+        for(var i = 0; i < parsers.length; i++){
+            parsers[i].magicEngine = self;
+            self.parsers.push(parsers[i]);
+        }
+        self.updateMagicTextAreaDiv(true);
     },
 
     addInlineSuggest : function(options){
@@ -571,8 +650,15 @@ var MagicTextArea = Notifier.extend({
             jSuggest.css('display','none');
             jSuggest.addClass('magicTextareaSuggestionList');
             self.suggestionList= new DropDownList(jSuggest);
-            self.jTa.after(jSuggest);
+            self.jMagicDiv.parent().after(jSuggest);
             jSuggest.width(self.jTa.width());
+            jQuery(document.body).click(function(e){
+                self.suggestionList.hide();
+            });
+            var offset = self.jMagicDiv.offset();
+            offset.top += self.jMagicDiv.height();
+            jSuggest.css('position','absolute');
+            jSuggest.offset(offset);
         }
         
         self.addListener({
@@ -596,6 +682,7 @@ var MagicTextArea = Notifier.extend({
                         return options.parseCaretWord(w,value);
                     }
                 });
+                self.suggestionList.hide();
             }
         });
     },

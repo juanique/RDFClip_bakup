@@ -45,7 +45,7 @@ def scene_cleanup(result):
     return result
 
 def imdb_search(q):
-    #Query the imdb search ening and get the results HTML
+    #Query the imdb search engine and get the results HTML
     response = open_url('http://www.imdb.com/find?s=all&q=%s' % urllib.quote(q), html=False)
     title_url = 'http://www.imdb.com/title/'
     if response.geturl()[:len(title_url)] == title_url:
@@ -60,7 +60,7 @@ def imdb_search(q):
     return results
 
 def isohunt_search(q):
-    #Query the isohunt search ening and get the results HTML
+    #Query the isohunt search engine and get the results HTML
     q = urllib.quote(q)
     soup = Soup(open_url('http://isohunt.com/torrents/?ihq=%s' % q), convertEntities='html', markupMassage=hexentityMassage)
     anchors = select(soup,'a[id^link]')
@@ -81,3 +81,14 @@ def isohunt_search(q):
     for r in results:
         res = [r[0]] + res
     return res
+
+def imdb_movie(url):
+    response = open_url(url, html=False)
+    soup = Soup(response.read(), convertEntities='html', markupMassage=hexentityMassage)
+
+    #Parse the HTML, fetch movie names and their corresponding page URLs
+    h1 = select(soup,'h1.header')
+    return {
+            'url' : url,
+            'title' : h1[0].contents[0].strip()
+    }

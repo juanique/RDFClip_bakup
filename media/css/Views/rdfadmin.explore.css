@@ -73,6 +73,7 @@ TR.even{
     cursor: pointer;
     border-left: 0;
     padding-left: 0;
+    width: 100%;
 }
 
 .newPropertyRow input.focus{

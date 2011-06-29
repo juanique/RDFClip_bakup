@@ -116,6 +116,6 @@ var DropDownList = Notifier.extend({
     show : function(){
        var self = this;
        self.jUl.show();
-    },
+    }
 
 });

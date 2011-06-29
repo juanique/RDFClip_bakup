@@ -37,3 +37,7 @@
 .textareaMagicDiv{
     padding-top: 5px;
 }
+
+.magicTextareaSuggestionList {
+    z-index: 1;
+}
