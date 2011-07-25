@@ -1,5 +1,6 @@
 //This library uses jQuery for ajax functionality.
 var __identity = function(x){return x};
+var $_RDFS, $_XMLS, $_CLIPS, $_NFO;
 
 var RDF = {
     Namespace : function(prefix){
@@ -11,6 +12,11 @@ var RDF = {
                 toString : function(){ return uri; }
             }
         }
+    },
+
+    Triple : function(s,p,o,type){
+        type = typeof type == 'string'? type : type.baseType;
+        return {s: str(s), p: str(p), o:str(o), object_type: type};
     },
 
     SparqlProxy : Class.extend({
@@ -75,13 +81,11 @@ var RDF = {
     }),
 
     ResultSet : Class.extend({
-
         init : function(bindings){
             var self = this;
             self.bindings = bindings;
             self.currentIndex = 0;
         },
-
         fetchRow : function(){
             var self = this;
             if(self.currentIndex >= self.bindings.length)
@@ -93,6 +97,12 @@ var RDF = {
                 out[i] = new RDF.ResultSetField(row[i]);
             }
             return out;
+        },
+        each : function(iterator){
+            var row;
+            while(row = this.fetchRow()){
+                iterator(row);
+            }
         }
 
     }),
@@ -103,6 +113,8 @@ var RDF = {
 
 
     _dataTypes : {
+    },
+    _properties : {
     },
 
     getResultHeaders : function(response){
@@ -121,17 +133,46 @@ var RDF = {
             return RDF._dataTypes[hashed];
         }
         return RDF._dataTypes.RDFUri;
+    },
+    property : function(name){
+        var hashed = RDF.hashUri(name);
+        if(typeof RDF._properties[hashed] == 'undefined'){
+            return RDF._properties[hashed] = new RDF.Property();
+        }
+        return RDF._properties[hashed];
+    },
+
+    addResource : function(type,res,base,props){
+        props.uri = res.uri;
+        this[type][res.hash] = new (base.extend(props))();
+    },
+
+    addType : function(res,base,props){
+        this.addResource("_dataTypes",res,base,props);
+    },
+    addProperty : function(res,props){
+        this.addResource("_properties",res,RDF.Property,props);
+    },
+    state : function(s,p,o){
+        if(str(p) ==  $_RDFS('range').uri){
+            this.property(str(s)).type = this.dataType(str(o));
+        }
     }
+
 }
 
-var $_RDFS = RDF.Namespace('http://www.w3.org/2000/01/rdf-schema#');
-var $_XMLS = RDF.Namespace('http://www.w3.org/2001/XMLSchema#');
-var $_CLIPS = RDF.Namespace('http://www.rdfclip.com/schema#');
+$_RDFS = RDF.Namespace('http://www.w3.org/2000/01/rdf-schema#');
+$_XMLS = RDF.Namespace('http://www.w3.org/2001/XMLSchema#');
+$_CLIPS = RDF.Namespace('http://www.rdfclip.com/schema#');
+$_NFO = RDF.Namespace('http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#');
 
-
-RDF._baseType = Class.extend({
-    parse : __identity,
+RDF.Uri = Class.extend({
+    uri : 'RDFUri:generic_uri',
     sparqlFormat : str,
+    baseType : "URI",
+    parse : __identity,
+    userFormat : __identity,
+    sparqlFormat : function(x){return '<'+x+'>';},
     validate : function(x){ return true; },
     selector : function(){
         var input = jQuery("<input emptyValue='Click to add' class='newPropertyInput'>");
@@ -142,35 +183,63 @@ RDF._baseType = Class.extend({
     }
 });
 
-RDF._dataTypes.RDFUri = new (RDF._baseType.extend({
-    uri : 'RDFUri:not_a_valid_uri',
+RDF.Literal = RDF.Uri.extend({
+    baseType : "Literal"
+});
+
+RDF._dataTypes.RDFUri = new (RDF.Uri.extend({
     sparqlFormat : function(val){
         return "<"+val+">";
     }
 }))();
 
-RDF._dataTypes[$_RDFS("Literal").hash] = new (RDF._baseType.extend({
-    uri : $_RDFS("Literal").uri,
+RDF.Property = Class.extend({
+    uri : 'RDFUri:property',
+    type : RDF._dataTypes.RDFUri,
+    parse : function(x){
+        return this.type.parse(x);
+    },
+    userFormat : function(x){
+        return this.type.userFormat(x);
+    },
+    validate : function(x){
+        return this.type.validate(x);
+    },
+    selector : function(){
+        return this.type.selector();
+    }
+});
+
+RDF._properties.DefaultProperty = new (RDF.Property.extend({
+}))();
+
+/***
+* Base Types
+*/
+RDF.addType($_RDFS("Literal"), RDF.Literal,{
     parse : __identity,
     sparqlFormat : function(x){ return '"'+x+'"' }
-}))();
+});
 
-RDF._dataTypes[$_XMLS("integer").hash] = new (RDF._baseType.extend({
-    uri : $_XMLS("integer").uri,
+RDF.addType($_XMLS("integer"), RDF.Literal,{
     parse : parseInt,
     sparqlFormat : str
-}))();
+});
 
-RDF._dataTypes[$_XMLS("string").hash] = new (RDF._baseType.extend({
-    uri : $_XMLS("string").uri,
-    parse : __identity,
+RDF.addType($_XMLS("float"), RDF.Literal,{
+    parse : parseFloat,
+    sparqlFormat : str
+});
+
+RDF.addType($_XMLS("string"), RDF.Literal,{
+    parse : str,
     sparqlFormat : function(x){return '"'+x+'"';}
-}))();
+});
 
-RDF._dataTypes[$_CLIPS("IMDBLink").hash] = new (RDF._baseType.extend({
-    uri : $_CLIPS("IMDBLink").uri,
-    parse : __identity,
-    sparqlFormat : function(x){return '<'+x+'>';},
+/***
+* Custom Types
+*/
+RDF.addType($_CLIPS("Movie"), RDF.Uri,{
     selector : function(){
         var input = jQuery("<input emptyValue='Click and paste an IMDB.com link' class='newPropertyInput'>");
         input.data('propertyType',RDF.dataType(this.uri));
@@ -178,4 +247,18 @@ RDF._dataTypes[$_CLIPS("IMDBLink").hash] = new (RDF._baseType.extend({
         input.emptyValue();
         return input;
     },
-}))();
+});
+
+/***
+* Custom Properties
+*/
+RDF.addProperty($_NFO("horizontalResolution"),{
+    userFormat : function(x){
+        return x+" pixels";
+    }
+});
+RDF.addProperty($_NFO("verticalResolution"),{
+    userFormat : function(x){
+        return x+" pixels";
+    }
+});

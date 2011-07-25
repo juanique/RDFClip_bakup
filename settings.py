@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'rdfadmin',
+    'api',
     'base',
     # Uncomment the next line to enable the admin:
 )

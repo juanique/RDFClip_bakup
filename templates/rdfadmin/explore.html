@@ -54,7 +54,7 @@
                 <script id='newPropertyTemplate' type='text/x-jquery-tmpl'>
                     {% verbatim %}
                     <TR class="newPropertyRow">
-                        <TH><span title='${propertyUri}' >{{html propertyName}}</span></TH>
+                        <TH>{{html propertyName}}</TH>
                         <TD><INPUT type='text' emptyValue='Click to add' class='newPropertyInput'></TD>
                     </TR>
                     {% endverbatim %}
@@ -93,6 +93,7 @@
                 <button class='inlineButton' id='saveChangesButton'>Save Changes</button>
             </div>
         </div>
+        <script type="text/javascript" src="/media/js/Lib/json2.js"></script>
         <script type="text/javascript" src="/media/js/Lib/jquery.query-2.1.7.js"></script>
         <script type="text/javascript" src="/media/js/Lib/oop.js"></script>
         <script type="text/javascript" src="/media/js/Rdf/rdf.js"></script>

@@ -1,4 +1,14 @@
+jQuery.ajaxSetup({contentType: 'application/json'});
 var newPropertySelector;
+var triplesRemoved = [];
+
+function getNewPropertyRow(templateData, uri,range){
+    var jNewRow = jQuery("#newPropertyTemplate").tmpl(templateData);
+    var jInput = RDF.dataType(range).selector();
+    jInput.data('propertyUri',uri);
+    jNewRow.find('td').empty().append(jInput);
+    return jNewRow;
+}
 
 function initNewPropertySelector(){
     newPropertySelector = new DropDownList();
@@ -11,47 +21,35 @@ function initNewPropertySelector(){
     newPropertySelector.addListener({
         optionSelected : function(value){
             console.debug(value);
-            var rendered = jQuery('#newPropertyTemplate').tmpl(value);
+            var rendered = getNewPropertyRow(value,value.propertyUri,value.propertyType);
             rendered.appendTo(jQuery('#explorerTable tbody'));
-
-            var type= RDF.dataType(value.propertyType);
-            console.debug(type);
-            var input = RDF.dataType(value.propertyType).selector();
-            input.data('propertyUri',value.propertyUri);
-            rendered.find('td').empty().append(input);
-            
-            input.focus();
+            rendered.find("input").focus();
             newPropertySelector.hide();
         }
     });
 }
 
+function getCurrentUri(){
+    return jQuery("#inputUri").val();
+}
+
 function getNewTriples(){
-    var sparql = 'INSERT INTO <'+insert_graph+'> {\n';
-    jQuery('.newPropertyRow input').each(function(i,input){
-        var jInput = jQuery(input);
+    var obj = {'insert':[],'delete' : triplesRemoved};
+
+    jQuery(".newPropertyRow").each(function(i,row){
+        jInput = jQuery(row).find('input');
         var type = jInput.data('propertyType');
-        if(!jInput.hasClass('empty')){
-            sparql += '<'+jQuery("#inputUri").val()+'> <'+jInput.data('propertyUri')+'> '+type.sparqlFormat(jInput.val())+' .\n';
-        }
+        obj.insert.push(RDF.Triple(getCurrentUri(),jInput.data('propertyUri'), jInput.val(),type))
 
     });
-    sparql += "}";
-    console.debug(sparql);
 
-    /*
-    getProxy().query({
-        query : sparql,
-        callback : function(r){
-            loadUri(jQuery('#inputUri').val());
-        }
-    });
-    */
-    return sparql;
+    console.debug(obj);
+
+    //jQuery.post('/api/insert/',JSON.stringify(obj), function(r){ window.location.reload() }, "json");
 }
 
 function newPropertySelected(e){
-    var res = jQuery('#inputUri').val();
+    var res = getCurrentUri();
 
     var sparql = '';
     sparql += 'define input:inference "http://www.rdfclip.com/schema/rules1" ';
@@ -73,7 +71,7 @@ function newPropertySelected(e){
             while(row = resultSet.fetchRow()){
                 options.push( {
                     name  : str(row.label),
-                    value : {propertyName : str(row.label), propertyUri: str(row.prop), propertyType: str(row.range)}
+                    value : {propertyName : formatResource(row,'prop','label') , propertyUri: str(row.prop), propertyType: str(row.range)}
                 });
             }
 
@@ -135,13 +133,22 @@ function getProxy(){
 }
 
 function loadUri(uri){
+    var sparql, graph, from;
+
     jQuery("#searchResultsTable").hide();
     jQuery("#imgDiv").show();
     hideFeedback();
 
-    var graph = jQuery("#inputGraph").val();
-    var from = (graph == "")? "": "FROM <"+graph+">";
-    var sparql = "SELECT DISTINCT ?p ?pl ?o ?ol "+from+" WHERE {<"+uri+"> ?p ?o . OPTIONAL { ?p <"+labelPredicate+"> ?pl } OPTIONAL { ?o <"+labelPredicate+"> ?ol}} ORDER BY ?p";
+    graph = jQuery("#inputGraph").val();
+    from = (graph == "")? "": "FROM <"+graph+">";
+
+    sparql  = 'prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> ';
+    sparql += "SELECT DISTINCT ?p ?pl ?o ?ol ?range "+from+" WHERE {";
+    sparql += " <"+uri+"> ?p ?o . ";
+    sparql += " ?p rdfs:range ?range . ";
+    sparql += " OPTIONAL { ?p <"+labelPredicate+"> ?pl }";
+    sparql += " OPTIONAL { ?o <"+labelPredicate+"> ?ol}}";
+    sparql += " ORDER BY ?p";
 
     //console.log(sparql);
 
@@ -158,12 +165,23 @@ function loadUri(uri){
                 jQuery("#explorerTable").show();
                 var resultSet = RDF.getResultSet(r);
                 var jTbody = jQuery('#explorerTable tbody').empty();
-                while(row = resultSet.fetchRow()){
+
+                resultSet.each(function(row){
+                    RDF.state(row.p, $_RDFS('range'), row.range);
                     var templateData = {};
                     templateData.propertyName = formatResource(row,'p','pl');
-                    templateData.propertyValue = formatResource(row,'o','ol');
-                    jQuery('#propertiesTemplate').tmpl(templateData).appendTo(jTbody);
-                }
+                    templateData.propertyValue = formatResource(row,'o','ol','p');
+                    var jRow = jQuery('#propertiesTemplate').tmpl(templateData);
+                    jRow.find("td").dblclick(function(){
+                        triplesRemoved.push(RDF.Triple(getCurrentUri(), row.p, row.o, RDF.dataType(row.range)));
+
+                        var jNewRow = getNewPropertyRow(templateData,row.p,row.range);
+                        jRow.replaceWith(jNewRow);
+                        jNewRow.find('input').val(row.o).focus();
+                    });
+                    jRow.appendTo(jTbody);
+
+                });
             }
         },
         error : function(e){
@@ -191,10 +209,16 @@ function getParams(uri){
     });
 }
 
-function formatResource(row, res, resLabel){
+function formatResource(row, res, resLabel, prop){
+    var userLabel = row[res].value;
+    if(prop != undefined){
+        prop = RDF.property(row[prop].value);
+        userLabel = prop.userFormat(userLabel);
+    }
     var params = getParams(row[res].value);
     var tag = row[res].isUri()? "A title='"+row[res]+"' href='"+base_url+"?"+params+"'":"SPAN";
-    var label = (typeof(row[resLabel]) == "undefined")? str(row[res]):str(row[resLabel]);
+
+    var label = (typeof(row[resLabel]) == "undefined")? userLabel:str(row[resLabel]);
     return "<"+tag+">"+label+"</"+tag+">";
 }
 

@@ -7,6 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^rdfadmin/', include('rdfclip.rdfadmin.urls')),
+    (r'^api/', include('rdfclip.api.urls')),
     # Example:
     # (r'^rdfclip/', include('rdfclip.foo.urls')),
 
