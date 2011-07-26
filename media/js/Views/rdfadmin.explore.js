@@ -39,13 +39,13 @@ function getNewTriples(){
     jQuery(".newPropertyRow").each(function(i,row){
         jInput = jQuery(row).find('input');
         var type = jInput.data('propertyType');
-        obj.insert.push(RDF.Triple(getCurrentUri(),jInput.data('propertyUri'), jInput.val(),type))
+        if(jInput.val() != ""){
+            obj.insert.push(RDF.Triple(getCurrentUri(),jInput.data('propertyUri'), jInput.val(),type))
+        }
 
     });
 
-    console.debug(obj);
-
-    //jQuery.post('/api/insert/',JSON.stringify(obj), function(r){ window.location.reload() }, "json");
+    jQuery.post('/api/batch/',JSON.stringify(obj), function(r){window.location.reload()}, "json");
 }
 
 function newPropertySelected(e){
@@ -173,7 +173,7 @@ function loadUri(uri){
                     templateData.propertyValue = formatResource(row,'o','ol','p');
                     var jRow = jQuery('#propertiesTemplate').tmpl(templateData);
                     jRow.find("td").dblclick(function(){
-                        triplesRemoved.push(RDF.Triple(getCurrentUri(), row.p, row.o, RDF.dataType(row.range)));
+                        triplesRemoved.push(RDF.Triple(getCurrentUri(), row.p, row.o, row.o.dataType));
 
                         var jNewRow = getNewPropertyRow(templateData,row.p,row.range);
                         jRow.replaceWith(jNewRow);

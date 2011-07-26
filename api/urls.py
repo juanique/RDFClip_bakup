@@ -13,4 +13,5 @@ rdftriple_resource = CsrfExemptResource(RDFTripleHandler)
 
 urlpatterns = patterns('',
     (r'insert/',rdftriple_resource),
+    (r'batch/',views.batch),
 )

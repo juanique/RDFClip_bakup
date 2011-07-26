@@ -44,6 +44,14 @@ class TripleStore:
         tf_query.write(virtuoso_command)
         tf_query.flush()
         self.execute(tf_query.name)
+        tf_query.close()
+
+    def query(self, q):
+        tf_query = tempfile.NamedTemporaryFile(dir=self.work_dir)
+        tf_query.write(q)
+        tf_query.flush()
+        self.execute(tf_query.name)
+        tf_query.close()
 
     def insert(self, g, data, p = None, o = None):
         if p is not None:
@@ -56,3 +64,28 @@ class TripleStore:
             tf_data.write(data.serialize(format='xml'))
             tf_data.flush()
             self.load_file(tf_data.name, g)
+
+    def delete(self, g, triples, p = None, o = None):
+        if p is not None:
+            return self.delete([[triples,p,o]])
+
+        lines = []
+        for t in triples:
+            if (isinstance(t[2],str) or isinstance(t[2],unicode)) and t[2][0] != '<':
+                c = "FILTER regex(?o, '%s')" % t[2]
+            else:
+                c = "FILTER (?o = %s)" % t[2]
+
+            #TODO: find a good way to delete literals!!
+            sparql = """
+                SPARQL MODIFY GRAPH <http://www.rdfclip.com/data>
+                DELETE { ?s ?p ?o}
+                INSERT {}
+                FROM <http://www.rdfclip.com/data>
+                WHERE
+                { ?s ?p ?o .
+                        FILTER (?s = %s) .
+                        FILTER (?p = %s) .
+                        %s . };
+                """ % (t[0],t[1],c)
+            self.query(sparql)

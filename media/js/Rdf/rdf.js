@@ -15,8 +15,13 @@ var RDF = {
     },
 
     Triple : function(s,p,o,type){
-        type = typeof type == 'string'? type : type.baseType;
-        return {s: str(s), p: str(p), o:str(o), object_type: type};
+        if(type.baseType == 'Literal'){
+            o = type.parse(str(o));
+        }else{
+            o = str(o);
+        }
+
+        return {s: str(s), p: str(p), o:o, object_type: type.baseType};
     },
 
     SparqlProxy : Class.extend({
@@ -63,7 +68,7 @@ var RDF = {
             var self = this;
 
             self.type = field.type;
-            self.dataType = RDF.dataType(field.type,field.dataType);
+            self.dataType = RDF.dataType(field.type,field.datatype);
             self.value = self.dataType.parse(field.value);
         },
 
@@ -127,6 +132,9 @@ var RDF = {
     },
     dataType : function(type, dataType){
         dataType = dataType || type;
+        if(dataType == 'literal'){
+            dataType = $_RDFS("Literal").uri
+        }
         var hashed = RDF.hashUri(dataType);
 
         if(RDF._dataTypes[hashed]){
