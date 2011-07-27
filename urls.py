@@ -1,15 +1,17 @@
 from django.conf.urls.defaults import *
 import settings
-from rdfclip.base import views 
+from base import views 
+from rdfadmin.views import home, explore
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^rdfadmin/', include('rdfclip.rdfadmin.urls')),
-    (r'^api/', include('rdfclip.api.urls')),
+    (r'^$', home),
+    (r'^rdfadmin/', include('rdfadmin.urls')),
+    (r'^resource/(?P<file_hash>[0-9A-Za-z]+)', explore),
+    (r'^api/', include('api.urls')),
     # Example:
-    # (r'^rdfclip/', include('rdfclip.foo.urls')),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:

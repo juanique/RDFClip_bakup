@@ -30,7 +30,7 @@ function initNewPropertySelector(){
 }
 
 function getCurrentUri(){
-    return jQuery("#inputUri").val();
+    return window.location.toString();
 }
 
 function getNewTriples(){
@@ -91,7 +91,7 @@ function search(term){
     jQuery("#imgDiv").show();
     hideFeedback();
 
-    var graph = jQuery("#inputGraph").val();
+    var graph = "http://www.rdfclip.com/data";
     var from = "";
     if(graph != "")
         from = "FROM <"+graph+">";
@@ -128,7 +128,7 @@ function search(term){
 }
 
 function getProxy(){
-    var endpoint = jQuery("#inputEndpoint").val();
+    var endpoint = "http://localhost:8890/sparql";
     return new RDF.SparqlProxy(proxyUrl, endpoint);
 }
 
@@ -139,7 +139,7 @@ function loadUri(uri){
     jQuery("#imgDiv").show();
     hideFeedback();
 
-    graph = jQuery("#inputGraph").val();
+    var graph = "";
     from = (graph == "")? "": "FROM <"+graph+">";
 
     sparql  = 'prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> ';
@@ -216,7 +216,7 @@ function formatResource(row, res, resLabel, prop){
         userLabel = prop.userFormat(userLabel);
     }
     var params = getParams(row[res].value);
-    var tag = row[res].isUri()? "A title='"+row[res]+"' href='"+base_url+"?"+params+"'":"SPAN";
+    var tag = row[res].isUri()? "A title='"+row[res]+"' href='"+row[res].value+"'":"SPAN";
 
     var label = (typeof(row[resLabel]) == "undefined")? userLabel:str(row[resLabel]);
     return "<"+tag+">"+label+"</"+tag+">";
@@ -230,13 +230,7 @@ function init(){
         graph = "";
     }
     var label = jQuery.query.get("label");
-    if(uri && endpoint){
-        jQuery("#inputUri").val(uri);
-        jQuery("#inputEndpoint").val(endpoint);
-        jQuery("#inputGraph").val(graph);
-        jQuery("#inputLabelUri").val(label);
-        loadUri(uri);
-    }
+    loadUri(window.location.toString());
 
     initNewPropertySelector();
     jQuery('#newPropertyButton').click(newPropertySelected);

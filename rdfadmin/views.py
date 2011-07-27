@@ -2,24 +2,25 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from rdfclip.scrapper.utils import open_url
+from scrapper.utils import open_url
 
 from models import RecentQuery
 
 import urllib
 import json
+import settings
 
 
 #@login_required
 def home(request):
     template_vars = RequestContext(request,{
-        'sparql_endpoint' : 'http://rafiki:8890/sparql',
+        'sparql_endpoint' : settings.SPARQL_ENDPOINT_URL,
     })
     return render_to_response('rdfadmin/query.html', template_vars)
 
-def explore(request):
+def explore(request,file_hash):
     template_vars = RequestContext(request,{
-        'sparql_endpoint' : 'http://rafiki:8890/sparql',
+        'sparql_endpoint' : settings.SPARQL_ENDPOINT_URL,
     })
     return render_to_response('rdfadmin/explore.html', template_vars)
 
@@ -47,6 +48,6 @@ def proxy(request):
     query_obj = RecentQuery(query = query, endpoint = endpoint, user = user, context = context)
     query_obj.save()
 
-    url = 'http://localhost/apps/visualization/sparqlproxy.php?query=%s&service_uri=%s&output=%s' % (urllib.quote(query), urllib.quote(endpoint), urllib.quote(output))
+    url = '%s?query=%s&service_uri=%s&output=%s' % (settings.SPARQL_PROXY_URL, urllib.quote(query), urllib.quote(endpoint), urllib.quote(output))
     return HttpResponse(open_url(url))
 

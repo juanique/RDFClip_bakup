@@ -2,6 +2,8 @@
 import os
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+SPARQL_PROXY_URL = 'http://localhost/sparqlproxy/sparqlproxy.php'
+SPARQL_ENDPOINT_URL = 'http://localhost:8890/sparql'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -67,7 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'rdfclip.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -86,7 +88,6 @@ INSTALLED_APPS = (
     'rdfadmin',
     'api',
     'base',
-    # Uncomment the next line to enable the admin:
 )
 
 LOGIN_URL = '/login/'

@@ -68,7 +68,8 @@ function executeQuery() {
                             var value = row[f];
                             if(value.isUri()){
                                 var a = jQuery("<a>"+value+"</a>").appendTo(td);
-                                a.attr('href',explore_url+"?uri="+escape(value)+"&endpoint="+jQuery('#sparql_endpoint').val()+"&graph=&label=http%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23label");
+                                a.attr('href',value);
+                                //a.attr('href',explore_url+"?uri="+escape(value)+"&endpoint="+jQuery('#sparql_endpoint').val()+"&graph=&label=http%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23label");
                             }else{
                                 td.html(str(value));
                             }
@@ -278,9 +279,3 @@ function loadSavedQueries(){
     });
 }
 
-                    parseCaretWord : function(word,value){
-                        return {
-                            span : $('&lt;span&gt;'+value+'&lt;/span&gt;').css('border-bottom','1px dotted blue'),
-                            tag : $('&lt;div title="'+word+' was parsed and '+value+' was tagged"&gt;')
-                        }
-                    }

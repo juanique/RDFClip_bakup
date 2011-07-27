@@ -52,4 +52,18 @@
 
 RDFClip uses a relational database to (TODO: specify why).
 
+### Apache configuration example (mod-python)
+
+    <VirtualHost *>
+        ServerName www.rdfclip.com
+
+        SetHandler python-program
+        PythonHandler django.core.handlers.modpython
+        SetEnv DJANGO_SETTINGS_MODULE settings
+        SetEnv DJANGO_SERVER_TYPE apache
+        PythonPath "['/home/rdfclip','/home/rdfclip_git'] + sys.path"
+    </VirtualHost>
+
     
+### mod-wsgi
+sudo apt-get install libapache2-mod-wsgi
