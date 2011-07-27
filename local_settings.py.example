@@ -8,3 +8,11 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+#Triple store
+VIRTUOSO_HOST = "localhost"
+VIRTUOSO_USER = "dba"
+VIRTUOSO_PASS = ""
+VIRTUOSO_WORK_DIR = ""
+DATA_GRAPH = "http://www.rdfclip.com/data"
+SCHEMA_GRAPH = "http://www.rdfclip.com/schema"
