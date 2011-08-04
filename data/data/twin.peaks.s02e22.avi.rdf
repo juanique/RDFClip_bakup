@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/f995fad3fe4374294714aa1a03989bd7">
+    <_3:verticalResolution>384 pixels</_3:verticalResolution>
+    <_3:frameRate>25.0 fps</_3:frameRate>
+    <rdfs:comment>Has audio/video index (2.9 MB)</rdfs:comment>
+    <_3:horizontalResolution>512 pixels</_3:horizontalResolution>
+    <_3:fileName>twin.peaks.s02e22.avi</_3:fileName>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:averageBitrate>1139.9 Kbit/sec</_3:averageBitrate>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:channels>stereo</_3:channels>
+    <_3:duration>48 min 10 sec 480 ms</_3:duration>
+  </rdf:Description>
+</rdf:RDF>

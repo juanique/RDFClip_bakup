@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/0bde898ef6ec8565e43fbdeb19267dd5">
+    <_3:horizontalResolution>704 pixels</_3:horizontalResolution>
+    <_3:codec>DivX v3 MPEG-4 Low-Motion (fourcc:"div3")</_3:codec>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:frameRate>25.0 fps</_3:frameRate>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:averageBitrate>1120.6 Kbit/sec</_3:averageBitrate>
+    <_3:channels>stereo</_3:channels>
+    <_3:duration>1 hour 35 min 10 sec</_3:duration>
+    <rdfs:comment>Has audio/video index (4.6 MB)</rdfs:comment>
+    <_3:fileName>Torrente 2 - Mision En Marbella (2001).avi</_3:fileName>
+    <_3:verticalResolution>389 pixels</_3:verticalResolution>
+  </rdf:Description>
+</rdf:RDF>

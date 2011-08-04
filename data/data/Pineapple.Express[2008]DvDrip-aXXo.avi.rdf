@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/60c6d67b034645e0fba17578d36e5914">
+    <_3:channels>stereo</_3:channels>
+    <_3:duration>1 hour 52 min 4 sec</_3:duration>
+    <_3:fileName>Pineapple.Express[2008]DvDrip-aXXo.avi</_3:fileName>
+    <_3:codec>XviD MPEG-4 (fourcc:"XVID")</_3:codec>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <rdfs:comment>Has audio/video index (4.9 MB)</rdfs:comment>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+    <_3:verticalResolution>268 pixels</_3:verticalResolution>
+    <_3:averageBitrate>981.5 Kbit/sec</_3:averageBitrate>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:horizontalResolution>664 pixels</_3:horizontalResolution>
+  </rdf:Description>
+</rdf:RDF>

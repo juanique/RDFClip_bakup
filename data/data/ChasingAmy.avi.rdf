@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/cbd8e335dbcb03ae4a01a178a34993a8">
+    <_3:verticalResolution>320 pixels</_3:verticalResolution>
+    <_3:horizontalResolution>592 pixels</_3:horizontalResolution>
+    <_3:averageBitrate>1920 Kbit/sec</_3:averageBitrate>
+    <_3:fileName>Chasing Amy.avi</_3:fileName>
+    <_3:duration>1 hour 45 min 36 sec</_3:duration>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <rdfs:comment>Has audio/video index (4.8 MB)</rdfs:comment>
+    <rdfs:label>Chasing Amy</rdfs:label>
+    <_3:channels>5</_3:channels>
+    <_3:codec>AC3</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <_3:frameRate>25.0 fps</_3:frameRate>
+  </rdf:Description>
+</rdf:RDF>

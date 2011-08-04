@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/41eead76db4422d0716399f59207eb41">
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <_3:averageBitrate>1024.2 Kbit/sec</_3:averageBitrate>
+    <_3:duration>1 hour 48 min 28 sec</_3:duration>
+    <_3:channels>stereo</_3:channels>
+    <_3:horizontalResolution>576 pixels</_3:horizontalResolution>
+    <_3:fileName>Le premier jour du reste de ta vie.avi</_3:fileName>
+    <_3:frameRate>25.0 fps</_3:frameRate>
+    <rdfs:comment>Has audio/video index (6.6 MB)</rdfs:comment>
+    <_3:verticalResolution>240 pixels</_3:verticalResolution>
+  </rdf:Description>
+</rdf:RDF>

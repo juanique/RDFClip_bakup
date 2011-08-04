@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/fd20fde813e963e1a3c43af4e8e8b873">
+    <_3:frameRate>24.0 fps</_3:frameRate>
+    <_3:horizontalResolution>664 pixels</_3:horizontalResolution>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"XVID")</_3:codec>
+    <_3:duration>1 hour 46 min 46 sec</_3:duration>
+    <_3:channels>stereo</_3:channels>
+    <_3:fileName>Tropic.Thunder[2008]DvDrip-aXXo.avi</_3:fileName>
+    <_3:verticalResolution>280 pixels</_3:verticalResolution>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:averageBitrate>1024.5 Kbit/sec</_3:averageBitrate>
+    <rdfs:comment>Has audio/video index (4.7 MB)</rdfs:comment>
+  </rdf:Description>
+</rdf:RDF>

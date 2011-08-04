@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/a20e81b5aa166d8ad72d9cab422d6e1b">
+    <_3:codec>V_MPEG4/ISO/AVC</_3:codec>
+    <_3:codec>S_TEXT/UTF8</_3:codec>
+    <_3:codec>A_AC3</_3:codec>
+    <_3:fileName>Star Trek 720p.mkv</_3:fileName>
+    <_3:duration>2 hours 6 min 50 sec</_3:duration>
+    <_3:channels>6</_3:channels>
+    <_3:verticalResolution>720 pixels</_3:verticalResolution>
+    <_3:horizontalResolution>1280 pixels</_3:horizontalResolution>
+  </rdf:Description>
+</rdf:RDF>

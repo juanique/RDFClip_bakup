@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/8a7b2dc22d499e30854a44ad657df446">
+    <_3:duration>2 hours 49 min 56 sec</_3:duration>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+    <_3:horizontalResolution>640 pixels</_3:horizontalResolution>
+    <rdfs:comment>Has audio/video index (10.2 MB)</rdfs:comment>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:averageBitrate>865.2 Kbit/sec</_3:averageBitrate>
+    <_3:fileName>Scarface [1983-DVDrip-Eng]-imgx-[NIKONRG].avi</_3:fileName>
+    <_3:channels>stereo</_3:channels>
+    <_3:codec>MPEG Layer 3 (fourcc:"")</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"XVID")</_3:codec>
+    <_3:verticalResolution>480 pixels</_3:verticalResolution>
+  </rdf:Description>
+</rdf:RDF>

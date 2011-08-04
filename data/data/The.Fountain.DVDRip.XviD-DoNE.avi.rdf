@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/0a08fc7831121295313990fef5d38514">
+    <_3:channels>stereo</_3:channels>
+    <_3:duration>1 hour 35 min 42 sec</_3:duration>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+    <_3:verticalResolution>320 pixels</_3:verticalResolution>
+    <_3:fileName>The.Fountain.DVDRip.XviD-DoNE.avi</_3:fileName>
+    <_3:horizontalResolution>576 pixels</_3:horizontalResolution>
+    <rdfs:comment>Has audio/video index (5.8 MB)</rdfs:comment>
+    <_3:averageBitrate>1151.6 Kbit/sec</_3:averageBitrate>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+  </rdf:Description>
+</rdf:RDF>

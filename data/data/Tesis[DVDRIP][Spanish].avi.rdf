@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/a88df37f4185e893528a4a5f3f0c0e71">
+    <rdfs:comment>Has audio/video index (5.1 MB)</rdfs:comment>
+    <rdfs:comment>audio WMA</rdfs:comment>
+    <_3:horizontalResolution>544 pixels</_3:horizontalResolution>
+    <_3:codec>Windows Media Audio V7 / V8 / V9</_3:codec>
+    <_3:codec>DivX v4 (fourcc:"divx")</_3:codec>
+    <_3:duration>1 hour 58 min 46 sec</_3:duration>
+    <_3:channels>stereo</_3:channels>
+    <_3:frameRate>25.0 fps</_3:frameRate>
+    <_3:verticalResolution>288 pixels</_3:verticalResolution>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:fileName>Tesis [DVDRIP][Spanish].avi</_3:fileName>
+    <_3:averageBitrate>880.6 Kbit/sec</_3:averageBitrate>
+  </rdf:Description>
+</rdf:RDF>
