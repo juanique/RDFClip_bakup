@@ -1,0 +1,68 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix clips: <http://www.rdfclip.com/schema#> .
+@prefix nfo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#> .
+@prefix nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> .
+@prefix uchile: <http://www.rdfclip.com/schema/uchile#> .
+
+#Classes
+clips:IMDBLink      rdf:type            rdfs:Class;
+                    rdfs:label          "IMDBLink" ;
+                    rdfs:subClassOf     nfo:Website .
+
+clips:YouTubeLink   rdf:type            rdfs:Class;
+                    rdfs:label          "YouTubeLink";
+                    rdfs:subClassOf     nfo:Website .
+
+clips:WikipediaLink rdf:type            rdfs:Class;
+                    rdfs:label          "WikipediaLink";
+                    rdfs:subClassOf     nfo:Website .
+
+clips:Movie         rdf:type            rdfs:Class;
+                    rdfs:label          "Movie" ;
+                    rdfs:subClassOf     rdfs:resource .
+
+clips:KnowledgeDomain   rdf:type            rdfs:Class;
+                        rdfs:label          "KnowledgeDomain" ;
+                        rdfs:subClassOf     rdfs:resource .
+
+#Properties
+clips:movieContent  rdfs:label          "movieContent";
+                    rdfs:domain         nfo:Video;
+                    rdfs:range          clips:Movie ;
+                    clips:userLabel     "Contained Movie" .
+
+clips:hasSubtitle   rdfs:label          "hasSubtitle";
+                    rdfs:domain         nfo:Video;
+                    rdfs:range          nfo:Document;
+                    clips:userLabel     "Subtitle file(s)" .
+
+clips:subtitleOf    rdfs:label          "subtitleOf";
+                    rdfs:domain         nfo:Document;
+                    rdfs:range          nfo:Video;
+                    clips:userLabel     "Subtitled video" .
+
+clips:userLabel     rdfs:label          "userLabel";
+                    rdfs:domain         rdfs:resource;
+                    rdfs:range          rdfs:Literal;
+                    clips:userLabel     "Properly Capitalized Label" .
+
+clips:related       rdfs:label          "relatedTo";
+                    rdfs:domain         nie:InformationElement;
+                    rdfs:range          nie:InformationElement;
+                    clips:userLabel     "Related file(s)" .
+
+clips:differentVersionOf rdfs:label         "differentVersionOf";
+                    rdfs:domain         nie:InformationElement;
+                    rdfs:range          nie:InformationElement;
+                    clips:userLabel     "Other versions of the same content" .
+
+clips:foundWith     rdfs:label          "foundWith";
+                    rdfs:domain         nie:InformationElement;
+                    rdfs:range          nie:InformationElement;
+                    clips:userLabel     "Found with file(s)" .
+
+clips:knowledgeDomain   rdfs:label          "knowledgeDomain";
+                        rdfs:domain         nie:InformationElement;
+                        rdfs:range          clips:KnowledgeDomain;
+                        clips:userLabel     "Knowledge Domain" .

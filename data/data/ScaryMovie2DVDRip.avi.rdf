@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/bc944bfc8f9781e09e1754c9fd793a68">
+    <_3:averageBitrate>1378.2 Kbit/sec</_3:averageBitrate>
+    <_3:verticalResolution>336 pixels</_3:verticalResolution>
+    <_3:frameRate>25.0 fps</_3:frameRate>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:codec>DivX v3 MPEG-4 Low-Motion (fourcc:"div3")</_3:codec>
+    <_3:horizontalResolution>608 pixels</_3:horizontalResolution>
+    <_3:fileName>Scary Movie 2 DVDRip.avi</_3:fileName>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <rdfs:comment>Has audio/video index (4.8 MB)</rdfs:comment>
+    <_3:duration>1 hour 18 min 58 sec</_3:duration>
+    <_3:channels>stereo</_3:channels>
+  </rdf:Description>
+</rdf:RDF>

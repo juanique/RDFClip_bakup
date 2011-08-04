@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/ff74e18f9ac07730ab8e310e75d7a6d7">
+    <_3:channels>stereo</_3:channels>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+    <_3:averageBitrate>1125.5 Kbit/sec</_3:averageBitrate>
+    <_3:horizontalResolution>572 pixels</_3:horizontalResolution>
+    <_3:fileName>Clerks.2[2006]DvDrip[Eng]-aXXo.avi</_3:fileName>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"XVID")</_3:codec>
+    <rdfs:comment>Has audio/video index (4.3 MB)</rdfs:comment>
+    <_3:verticalResolution>312 pixels</_3:verticalResolution>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:duration>1 hour 37 min 32 sec</_3:duration>
+  </rdf:Description>
+</rdf:RDF>

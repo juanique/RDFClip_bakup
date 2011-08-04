@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/08836a53e463a516bfec061be7274a7e">
+    <_3:verticalResolution>272 pixels</_3:verticalResolution>
+    <_3:averageBitrate>915.8 Kbit/sec</_3:averageBitrate>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:duration>2 hours 34 sec 435 ms</_3:duration>
+    <_3:channels>stereo</_3:channels>
+    <_3:fileName>Slumdog Millionaire.avi</_3:fileName>
+    <_3:horizontalResolution>640 pixels</_3:horizontalResolution>
+    <rdfs:comment>Has audio/video index (7.2 MB)</rdfs:comment>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+  </rdf:Description>
+</rdf:RDF>

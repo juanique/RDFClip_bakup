@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/bd2494f455e27da078cd9c81b96995bc">
+    <_3:duration>1 hour 28 min 43 sec</_3:duration>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:horizontalResolution>624 pixels</_3:horizontalResolution>
+    <_3:averageBitrate>1254.7 Kbit/sec</_3:averageBitrate>
+    <_3:verticalResolution>352 pixels</_3:verticalResolution>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <_3:fileName>Life.After.People.2008.PROPER.DVDRiP.XviD-SUNSPOT.avi</_3:fileName>
+    <_3:channels>stereo</_3:channels>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+    <rdfs:comment>Has audio/video index (5.3 MB)</rdfs:comment>
+    <rdfs:label>Life After People</rdfs:label>
+  </rdf:Description>
+</rdf:RDF>

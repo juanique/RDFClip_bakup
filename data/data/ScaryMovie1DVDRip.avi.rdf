@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/db76b21b7ba7e9dbafecbfe2b9a8de74">
+    <_3:fileName>Scary Movie 1 DVDRip.avi</_3:fileName>
+    <_3:horizontalResolution>640 pixels</_3:horizontalResolution>
+    <_3:duration>1 hour 26 min 17 sec</_3:duration>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:codec>DivX v3 MPEG-4 Low-Motion (fourcc:"div3")</_3:codec>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:channels>stereo</_3:channels>
+    <rdfs:comment>Has audio/video index (3.8 MB)</rdfs:comment>
+    <_3:averageBitrate>1254.1 Kbit/sec</_3:averageBitrate>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+    <_3:verticalResolution>272 pixels</_3:verticalResolution>
+  </rdf:Description>
+</rdf:RDF>

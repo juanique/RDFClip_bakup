@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/0624c5e0057bc099b9e0b45f8d4dae6a">
+    <_3:verticalResolution>1080 pixels</_3:verticalResolution>
+    <_3:horizontalResolution>1920 pixels</_3:horizontalResolution>
+    <_3:codec>S_TEXT/UTF8</_3:codec>
+    <_3:codec>A_DTS</_3:codec>
+    <_3:codec>V_MPEG4/ISO/AVC</_3:codec>
+    <_3:fileName>UP.2009.Bluray.1080p.DTS.x264.dxva-SAMPLE-FraMeSToR.mkv</_3:fileName>
+    <_3:duration>1 min 811 ms</_3:duration>
+    <_3:channels>6</_3:channels>
+  </rdf:Description>
+</rdf:RDF>

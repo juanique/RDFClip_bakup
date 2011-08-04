@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/a271df64760450a78604571674feeb1e">
+    <_3:fileName>s-johnmalkovich.mkv</_3:fileName>
+    <_3:duration>1 hour 52 min 51 sec</_3:duration>
+    <_3:codec>V_MPEG4/ISO/AVC</_3:codec>
+    <_3:codec>A_AC3</_3:codec>
+    <_3:horizontalResolution>1280 pixels</_3:horizontalResolution>
+    <_3:verticalResolution>688 pixels</_3:verticalResolution>
+    <_3:channels>6</_3:channels>
+  </rdf:Description>
+</rdf:RDF>

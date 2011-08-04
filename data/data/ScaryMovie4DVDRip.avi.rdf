@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/c91e13bae07cdea29ecff9d1a830b949">
+    <_3:averageBitrate>1382.4 Kbit/sec</_3:averageBitrate>
+    <rdfs:comment>Has audio/video index (3.9 MB)</rdfs:comment>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:duration>1 hour 29 min 35 sec</_3:duration>
+    <_3:codec>AC3</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"XVID")</_3:codec>
+    <_3:fileName>Scary Movie 4 DVDRip.avi</_3:fileName>
+    <_3:channels>stereo</_3:channels>
+    <_3:verticalResolution>288 pixels</_3:verticalResolution>
+    <_3:horizontalResolution>528 pixels</_3:horizontalResolution>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+  </rdf:Description>
+</rdf:RDF>

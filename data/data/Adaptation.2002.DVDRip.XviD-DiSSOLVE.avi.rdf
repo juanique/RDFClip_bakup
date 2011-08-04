@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/da6a3be9c349491e4ead28a774a86e6f">
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:averageBitrate>954.3 Kbit/sec</_3:averageBitrate>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+    <_3:verticalResolution>336 pixels</_3:verticalResolution>
+    <_3:horizontalResolution>624 pixels</_3:horizontalResolution>
+    <rdfs:comment>Has audio/video index (6.9 MB)</rdfs:comment>
+    <rdfs:label>Adaptation<rdfs:label>
+    <_3:fileName>Adaptation.2002.DVDRip.XviD-DiSSOLVE.avi</_3:fileName>
+    <_3:channels>stereo</_3:channels>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:duration>1 hour 54 min 56 sec</_3:duration>
+  </rdf:Description>
+</rdf:RDF>

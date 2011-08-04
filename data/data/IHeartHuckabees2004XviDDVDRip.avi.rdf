@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/198af41e732a7401fd16928ae79e107a">
+    <_3:horizontalResolution>688 pixels</_3:horizontalResolution>
+    <_3:channels>stereo</_3:channels>
+    <_3:averageBitrate>1044.7 Kbit/sec</_3:averageBitrate>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:verticalResolution>288 pixels</_3:verticalResolution>
+    <rdfs:comment>Has audio/video index (6.4 MB)</rdfs:comment>
+    <rdfs:label>I Heart Huckabees</rdfs:label>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <_3:fileName>I Heart Huckabees 2004 XviD DVDRip.avi</_3:fileName>
+    <_3:duration>1 hour 46 min 38 sec</_3:duration>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/6c3ea19236b2aee7d006cfae82bae14c">
+    <_3:duration>2 hours 30 sec 230 ms</_3:duration>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:horizontalResolution>640 pixels</_3:horizontalResolution>
+    <rdfs:comment>Has audio/video index (7.2 MB)</rdfs:comment>
+    <rdfs:label>The Social Network</rdfs:label>
+    <_3:averageBitrate>944.8 Kbit/sec</_3:averageBitrate>
+    <_3:channels>stereo</_3:channels>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:verticalResolution>272 pixels</_3:verticalResolution>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+  </rdf:Description>
+</rdf:RDF>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/ca860df7aff2a4239b650b41a2372b03">
+    <_3:horizontalResolution>528 pixels</_3:horizontalResolution>
+    <_3:averageBitrate>1150.2 Kbit/sec</_3:averageBitrate>
+    <_3:fileName>Napoleon Dynamite.avi</_3:fileName>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <rdfs:comment>Has audio/video index (5.7 MB)</rdfs:comment>
+    <_3:duration>1 hour 34 min 53 sec</_3:duration>
+    <_3:frameRate>24.0 fps</_3:frameRate>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:verticalResolution>400 pixels</_3:verticalResolution>
+    <_3:channels>stereo</_3:channels>
+  </rdf:Description>
+</rdf:RDF>

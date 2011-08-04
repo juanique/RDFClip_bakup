@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/a2c6a6f7c49ec8baa94bea9001ac8083">
+    <_3:averageBitrate>1253.5 Kbit/sec</_3:averageBitrate>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:horizontalResolution>560 pixels</_3:horizontalResolution>
+    <_3:verticalResolution>304 pixels</_3:verticalResolution>
+    <rdfs:comment>Has audio/video index (5.5 MB)</rdfs:comment>
+    <_3:frameRate>25.0 fps</_3:frameRate>
+    <_3:channels>stereo</_3:channels>
+    <_3:fileName>The.Boy.In.The.Striped.Pyjamas-iKA.avi</_3:fileName>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:duration>1 hour 30 min 31 sec</_3:duration>
+  </rdf:Description>
+</rdf:RDF>

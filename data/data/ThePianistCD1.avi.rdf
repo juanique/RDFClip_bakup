@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:_3="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.rdfclip.com/resource/f3f3931fc18ed6e070d83c49313dc0c2">
+    <_3:fileName>The Pianist CD1.avi</_3:fileName>
+    <_3:frameRate>25.0 fps</_3:frameRate>
+    <rdf:type rdf:resource="http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"/>
+    <_3:codec>MPEG Layer 3</_3:codec>
+    <_3:codec>XviD MPEG-4 (fourcc:"xvid")</_3:codec>
+    <_3:channels>stereo</_3:channels>
+    <_3:verticalResolution>336 pixels</_3:verticalResolution>
+    <rdfs:comment>Has audio/video index (3.7 MB)</rdfs:comment>
+    <rdfs:label>The Pianist Part 1 of 2</rdfs:label>
+    <_3:horizontalResolution>640 pixels</_3:horizontalResolution>
+    <_3:averageBitrate>1753.4 Kbit/sec</_3:averageBitrate>
+    <_3:duration>1 hour 12 sec 880 ms</_3:duration>
+  </rdf:Description>
+</rdf:RDF>
