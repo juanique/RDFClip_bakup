@@ -45,7 +45,7 @@
    This packages are in current Debian/Ubuntu distributions so you can
    install them using the package manager.
    
-    sudo apt-get install python-beatifulsoup
+    sudo apt-get install python-beautifulsoup
     sudo apt-get install python-mechanize
 
 ### Database setup
