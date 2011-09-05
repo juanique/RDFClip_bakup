@@ -29,6 +29,9 @@ def explore(request,file_hash):
 def proxy(request):
     query = request.GET['query']
     endpoint = request.GET.get('service_uri', settings.VIRTUOSO_ENDPOINT)
+    if endpoint[4:] !=  "http":
+        endpoint = "http://%s" % endpoint
+
     output = request.GET['output']
 
     context = request.GET.get('context','')
