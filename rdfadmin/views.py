@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from scrapper.utils import open_url
+from base.connection import get_sparql_proxy
 
 from models import RecentQuery
 
@@ -25,14 +26,7 @@ def explore(request,file_hash):
     return render_to_response('rdfadmin/explore.html', template_vars)
 
 
-def local_proxy(endpoint, query, output):
-    return "%s?query=%s&format=%s" % (endpoint, urllib.quote(query), output)
-
-def remote_proxy(endpoint, query, output):
-    return '%s?query=%s&service_uri=%s&output=%s' % (settings.SPARQL_PROXY_URL, urllib.quote(query), urllib.quote(endpoint), urllib.quote(output))
-
 def proxy(request):
-    request_type = request.GET.get('request_type','local')
     query = request.GET['query']
     endpoint = request.GET.get('service_uri', settings.VIRTUOSO_ENDPOINT)
     output = request.GET['output']
@@ -55,5 +49,5 @@ def proxy(request):
     query_obj = RecentQuery(query = query, endpoint = endpoint, user = user, context = context)
     query_obj.save()
 
-    url =  (local_proxy if request_type == 'local' else remote_proxy)(endpoint, query, output)
-    return HttpResponse(open_url(url))
+    proxy_obj = get_sparql_proxy();
+    return HttpResponse(proxy_obj.query(query, endpoint, output))
