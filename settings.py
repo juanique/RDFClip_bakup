@@ -2,6 +2,8 @@
 import os
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+
+#if using the php proxy for sparql queries
 SPARQL_PROXY_URL = 'http://localhost/sparqlproxy/sparqlproxy.php'
 SPARQL_ENDPOINT_URL = 'http://localhost:8890/sparql'
 

@@ -48,6 +48,11 @@
     sudo apt-get install python-beautifulsoup
     sudo apt-get install python-mechanize
 
+4. To doc
+
+    sudo apt-get install virtuoso-opensource-6.1
+    sudo apt-get install php5-curl
+
 ### Database setup
 
 RDFClip uses a relational database to (TODO: specify why).

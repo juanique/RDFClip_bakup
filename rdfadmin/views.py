@@ -25,12 +25,19 @@ def explore(request,file_hash):
     return render_to_response('rdfadmin/explore.html', template_vars)
 
 
-def proxy(request):
-    query = request.GET['query']
-    endpoint = request.GET['service_uri']
-    output = request.GET['output']
-    context = request.GET.get('context','')
+def local_proxy(endpoint, query, output):
+    return "%s?query=%s&format=%s" % (endpoint, urllib.quote(query), output)
 
+def remote_proxy(endpoint, query, output):
+    return '%s?query=%s&service_uri=%s&output=%s' % (settings.SPARQL_PROXY_URL, urllib.quote(query), urllib.quote(endpoint), urllib.quote(output))
+
+def proxy(request):
+    request_type = request.GET.get('request_type','local')
+    query = request.GET['query']
+    endpoint = request.GET.get('service_uri', settings.VIRTUOSO_ENDPOINT)
+    output = request.GET['output']
+
+    context = request.GET.get('context','')
     user = None
     if hasattr(request, 'user'):
         user = request.user
@@ -48,6 +55,5 @@ def proxy(request):
     query_obj = RecentQuery(query = query, endpoint = endpoint, user = user, context = context)
     query_obj.save()
 
-    url = '%s?query=%s&service_uri=%s&output=%s' % (settings.SPARQL_PROXY_URL, urllib.quote(query), urllib.quote(endpoint), urllib.quote(output))
+    url =  (local_proxy if request_type == 'local' else remote_proxy)(endpoint, query, output)
     return HttpResponse(open_url(url))
-
