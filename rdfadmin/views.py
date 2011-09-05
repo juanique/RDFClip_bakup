@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from scrapper.utils import open_url
+from base.connection import get_sparql_proxy
 
 from models import RecentQuery
 
@@ -48,6 +49,5 @@ def proxy(request):
     query_obj = RecentQuery(query = query, endpoint = endpoint, user = user, context = context)
     query_obj.save()
 
-    url = '%s?query=%s&service_uri=%s&output=%s' % (settings.SPARQL_PROXY_URL, urllib.quote(query), urllib.quote(endpoint), urllib.quote(output))
-    return HttpResponse(open_url(url))
-
+    proxy_obj = get_sparql_proxy();
+    return HttpResponse(proxy_obj.query(query, endpoint, output))

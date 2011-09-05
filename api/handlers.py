@@ -11,6 +11,5 @@ class RDFTripleHandler(BaseHandler):
     model = RDFTriple
 
     def create(self, request, *args, **kwargs):
-        print request.content_type
         if request.content_type:
             triplestore.insert(data)

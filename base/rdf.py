@@ -2,8 +2,12 @@ import tempfile
 import time
 import os
 import pdb
+import urllib
+
+from xml.dom import minidom
 from subprocess import call
 from rdflib import Graph, Namespace, Literal
+from scrapper.utils import open_url
 
 FILE = Namespace('http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#')
 RDFS = Namespace('http://www.w3.org/2000/01/rdf-schema#')
@@ -26,6 +30,68 @@ hachoir_mapping = {
     #Classes by  mimetype
     'video/x-msvideo' : FILE['Video'],
 }
+
+class ResultValue:
+
+    def __init__(self, dom):
+        self.type = dom.tagName
+        self.value = str(dom.firstChild.data)
+
+class ResultRow:
+    
+    def __init__(self, dom):
+        self.dom = dom
+        dom_fields = self.dom.getElementsByTagName('binding')
+        self.values = {}
+        for element in dom_fields:
+            name = element.getAttribute("name")
+            dom_value = element.firstChild
+
+            self.values[name] = ResultValue(dom_value)
+
+    def __getitem__(self,item):
+        return self.values[item]
+    
+
+class ResultSet:
+
+    def __init__(self, data):
+        self.dom = minidom.parseString(data)
+        self.results = self.dom.getElementsByTagName('result')
+        self.current_row = 0
+        self.total_rows = len(self.results)
+
+    def get_row(self):
+        row = self.results[self.current_row]
+        self.current_row += 1
+        return ResultRow(row)
+
+    def can_read(self):
+        return self.current_row < self.total_rows
+
+
+class SparqlProxy:
+
+    def __init__(self, proxy_url, default_endpoint='http://localhost:8890/sparql'):
+        self.proxy_url = proxy_url
+        self.default_endpoint = default_endpoint
+
+    def query(self, query, endpoint=None, output='json'):
+        request_output = output
+        if output == 'ResultSet':
+            request_output = 'xml'
+
+        if endpoint is None:
+            endpoint = self.default_endpoint
+        url = '%s?query=%s&service_uri=%s&output=%s' % (self.proxy_url, urllib.quote(query), urllib.quote(endpoint), urllib.quote(request_output))
+
+        data = open_url(url)
+        if output == 'ResultSet':
+            return ResultSet(data)
+        return data
+
+
+
 
 class TripleStore:
 

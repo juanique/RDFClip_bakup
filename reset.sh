@@ -6,6 +6,9 @@ virtuoso_config=`cat local_settings.py | grep '#-VIRTUOSOINI' | sed -re"s/^.+=[^
 virtuoso_work=`cat local_settings.py | grep '#-VIRTUOSOWORK' | sed -re"s/^.+=[^']'([^']+)'.*$/\1/"`
 schema_graph=`cat local_settings.py | grep '#-SCHEMAGRAPH' | sed -re"s/^.+=[^']'([^']+)'.*$/\1/"`
 data_graph=`cat local_settings.py | grep '#-DATAGRAPH' | sed -re"s/^.+=[^']'([^']+)'.*$/\1/"`
+virtuoso_host=`cat local_settings.py | grep '#-VIRTUOSOHOST' | sed -re"s/^.+=[^']'([^']+)'.*$/\1/"`
+virtuoso_user=`cat local_settings.py | grep '#-VIRTUOSOUSER' | sed -re"s/^.+=[^']'([^']+)'.*$/\1/"`
+virtuoso_pass=`cat local_settings.py | grep '#-VIRTUOSOPASS' | sed -re"s/^.+=[^']'([^']+)'.*$/\1/"`
 
 
 if [ $# -lt 1 ]; then
@@ -13,6 +16,7 @@ if [ $# -lt 1 ]; then
     echo "mysql-create-db"
     echo "virtuoso-(add|remove)-dir <path>"
     echo "virtuoso-(list|autoset)-dir"
+    echo "virtuoso-load-inference"
     echo "clip-(load|clean|reset)[-schema|-data]"
 else
     if [ $1 = "mysql-create-db" ]; then
@@ -88,6 +92,9 @@ else
     if [ $1 = "clip-reset" ]; then
         ./$0 clip-reset-data
         ./$0 clip-reset-schema
+    fi
+    if [ $1 = "virtuoso-load-inference" ]; then
+        isql-vt $virtuoso_host $virtuoso_user $virtuoso_pass  ./scripts/inference.sql
     fi
 fi
 
